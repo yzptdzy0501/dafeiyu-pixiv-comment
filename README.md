@@ -7,9 +7,9 @@
 它是 [`dsh-pixiv-scroll`](../dsh-pixiv-scroll) 的**评论专用拆分版**：登录、Python MCP、代理、
 精选表这些底座完全一样，只是把「保存作品」整条链路拿掉了，只剩评论。
 
-> 💡 **灵感来源**：本插件的玩法与代码底座来自大肥鱼的
+> 💡 **灵感来源**：本插件的玩法与代码底座来自kuroshio4396的
 > [`kuroshio4396/dafayu-pixiv-duty`](https://github.com/kuroshio4396/dafayu-pixiv-duty)
-> ——「让模型自己上蓝P挑作品、看图、写评语」这件事是它先做出来的。
+> ——「让模型自己上蓝P挑作品、看图」这件事是它先做出来的。
 > 详见文末[致谢](#致谢)。
 
 ## 和刷图版有什么不同
@@ -122,7 +122,7 @@ node selfcheck.mjs        # 115 项断言，退出码 0 才算过
 这个插件不是从零想出来的，是一路站在别人肩膀上：
 
 - **[`kuroshio4396/dafayu-pixiv-duty`](https://github.com/kuroshio4396/dafayu-pixiv-duty)**（大肥鱼刷P插件）
-  —— **本插件的灵感来源与直接底本**。「让模型自己去蓝P挑作品、看图、写评语」这套玩法，
+  —— **本插件的灵感来源与直接底本**。「让模型自己去蓝P挑作品、看图」这套玩法，
   以及插件骨架（宿主半端 + headless 子会话 + 内置 Python MCP + 设置面板）、
   `prompts/duty.md` 章程的写法，都来自这个项目，来自 B 站 UP 主
   [阳炎级三番舰黑潮](https://space.bilibili.com/17568052) 的视频
