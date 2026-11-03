@@ -586,6 +586,48 @@ window.__ModuleLoader__.load({
           ),
         ),
 
+        /* 本地评论墙 */
+        h(Section, { title: '本地评论墙' },
+          h('div', { 'data-px-say': '' }, '每条评语都会同步到本机的一个小网页（只监听 127.0.0.1，不上传网络）。写完一轮去那里翻，比看 jsonl 舒服。'),
+          h(ToggleRow, {
+            label: '把评语同步到评论墙',
+            note: '关掉就只写 comments.jsonl',
+            on: cfg.wallEnabled, onChange: (v) => save({ wallEnabled: v }),
+          }),
+          h(ToggleRow, {
+            label: '插件启动时自动拉起评论墙',
+            note: '独立小进程，插件刷新/重启不会把它弄断',
+            on: cfg.wallAutoStart, onChange: (v) => save({ wallAutoStart: v }), disabled: !cfg.wallEnabled,
+          }),
+          h(TextField, {
+            label: '评论墙地址',
+            note: '端口被占用就换个空闲的，例如 http://127.0.0.1:7879',
+            value: cfg.wallUrl || 'http://127.0.0.1:7878',
+            onCommit: (v) => save({ wallUrl: v }),
+          }),
+          h('div', { 'data-px-bar': '' },
+            h('button', {
+              'data-px-btn': '', 'data-primary': '',
+              disabled: !cfg.wallEnabled,
+              onClick: () => { const u = status?.wall?.url || cfg.wallUrl || 'http://127.0.0.1:7878'; try { window.open(u, '_blank', 'noopener') } catch { /* 忽略 */ } },
+            }, '打开评论墙'),
+            h('button', {
+              'data-px-btn': '',
+              disabled: !cfg.wallEnabled || busy === 'wall',
+              onClick: async () => {
+                setBusy('wall')
+                try { await jpost('/wall/start', {}); await refresh() } catch { /* 状态条会说话 */ }
+                setBusy('')
+              },
+            }, busy === 'wall' ? '拉起中…' : '重新拉起'),
+            h('span', { 'data-px-note': '' }, !cfg.wallEnabled
+              ? '评论墙已关闭'
+              : status?.wall?.running
+                ? `运行中 · 已收 ${status.wall.count ?? 0} 条 · ${status.wall.url}`
+                : `未运行${status?.wall?.error ? `（${status.wall.error}）` : ''}`),
+          ),
+        ),
+
         /* 网络 */
         h(Section, { title: '网络' },
           h(TextField, {

@@ -27,6 +27,7 @@ import { stateDirOf, ensureDirs, ensureHomeFiles, ensureCharter, appendLog, dayK
 import { createToolset } from './lib/toolset.mjs'
 import { registerHttp } from './lib/http.mjs'
 import { runRound } from './lib/runner.mjs'
+import { startWall, wallStatus } from './lib/wall.mjs'
 
 const PLUGIN_DIR = dirname(fileURLToPath(import.meta.url))
 
@@ -72,6 +73,20 @@ export function apply(ctx, config = {}) {
     log(`工作区注册跳过：${e?.message ?? e}`)
   }
 
+  // ── 本地评论墙 ──
+  // 一个只监听 127.0.0.1 的小网页，把每条评语都收进来看。默认随插件一起起来；
+  // 起不来（端口被占等）只记日志，绝不拖累插件本身。
+  try {
+    const cfg0 = loadCfg(home)
+    if (cfg0.wallEnabled && cfg0.wallAutoStart) {
+      startWall({ home, cfg: cfg0, pluginDir: PLUGIN_DIR, log })
+        .then((r) => log(r.ok ? `评论墙：${r.url}（已收 ${r.count ?? 0} 条）` : `评论墙没起来：${r.error}`))
+        .catch((e) => log(`评论墙异常：${e?.message ?? e}`))
+    }
+  } catch (e) {
+    log(`评论墙跳过：${e?.message ?? e}`)
+  }
+
   const toolset = createToolset({
     ctx,
     defineTool: defineTool || ((o) => o),
@@ -82,7 +97,7 @@ export function apply(ctx, config = {}) {
 
   // ── HTTP ──
   try {
-    const api = registerHttp(ctx, { home, toolset, log })
+    const api = registerHttp(ctx, { home, toolset, log, pluginDir: PLUGIN_DIR })
     ctx.effect(() => () => api.dispose?.(), 'pixiv-comment: http')
     log(`HTTP 已挂载 ${api.prefix}`)
   } catch (e) {

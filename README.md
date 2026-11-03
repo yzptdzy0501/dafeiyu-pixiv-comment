@@ -34,6 +34,33 @@
 - 写一份 Markdown 日报到 `out/<日期>.md`
 - 额度两道闸：`commentPerRun`（每次最多几条）+ `commentPerDay`（每天最多几条）
 
+## 本地评论墙
+
+插件自带一个只监听 `127.0.0.1` 的小网页（默认 <http://127.0.0.1:7878/>），把每条评语收进去，按时间倒序排成卡片，点标题旁边的路径就能跳回 Pixiv 原作品。数据全在本机，**不上传任何服务器**。
+
+- `wallEnabled`：关掉就只写 `comments.jsonl`，网站不再收新评语
+- `wallAutoStart`：插件启动时顺手拉起那个小进程（独立进程，插件刷新/重启不会把它弄断）
+- `wallUrl`：地址，端口被占用就换个空闲的，例如 `http://127.0.0.1:7879`
+- 设置页「本地评论墙」里有「打开评论墙」「重新拉起」两个按钮；墙没跑起来时状态条会写原因
+
+手动跑一次也行：
+
+```bash
+node tools/comment-wall.mjs          # 默认 127.0.0.1:7878
+WALL_PORT=7879 node tools/comment-wall.mjs
+```
+
+接口（给别的东西往上贴评语用）：
+
+| 方法 | 路径 | 说明 |
+|---|---|---|
+| GET | `/` | 页面 |
+| GET | `/api/comments?limit=&q=` | JSON 列表 |
+| POST | `/api/comments` | 收一条：`{ id, text, kind, title, artist, url, rating }` |
+| GET | `/api/health` | `{ ok, count, version }` |
+
+重复推送同一条（同 id、同文本、10 分钟内）会被认成重复并跳过，所以重试是安全的。
+
 ## 安全边界
 
 - `commentPost` 默认 **false**：评语只进本地文件。
@@ -99,6 +126,8 @@ Pixiv 每次刷新都换发新值。两个插件各存一份会互相把对方�
 | `comments.jsonl` | 每条评语一行（`id` / `text` / `posted` / `postError`） |
 | `favorites.jsonl` | 精选表（带网址，按 id 收敛、分数高者胜） |
 | `state.json` | 本轮状态、额度计数 |
+| `wall/comments.jsonl` | 评论墙收下的评语（网页读的就是它） |
+| `wall/wall.log` | 评论墙自己的日志（起来没、收了什么） |
 | `out/<日期>.md` | 日报 |
 | `duty.md` | 这一轮的行为章程（用户可改） |
 | `library/` | 默认作品目录（本插件不写作品，仅占位） |

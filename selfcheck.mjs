@@ -16,7 +16,7 @@ import { mkdirSync, rmSync, readFileSync, existsSync, writeFileSync,
 import { join, isAbsolute } from 'node:path'
 import { tmpdir } from 'node:os'
 import { spawnSync } from 'node:child_process'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { dirname } from 'node:path'
 
 const ROOT = dirname(fileURLToPath(import.meta.url))
@@ -520,6 +520,28 @@ try {
   must(!existsSync(join(ROOT, 'lib', 'asr.py')) && !existsSync(join(ROOT, 'lib', 'verify.mjs')),
     '没有残留视频相关模块（asr / 评论复核）')
 } catch (e) { bad('结构检查失败', e) }
+
+/* 11. 本地评论墙 */
+group('⑪ 本地评论墙')
+try {
+  const { SPEC } = await import(pathToFileURL(join(ROOT, 'lib', 'config.mjs')).href)
+  for (const k of ['wallEnabled', 'wallAutoStart', 'wallUrl']) must(k in SPEC, `配置里有 ${k}`)
+  const wall = await import(pathToFileURL(join(ROOT, 'lib', 'wall.mjs')).href)
+  for (const fn of ['wallBase', 'wallStatus', 'startWall', 'pushComment']) {
+    must(typeof wall[fn] === 'function', `lib/wall.mjs 导出 ${fn}`)
+  }
+  must(wall.wallBase({ wallUrl: '' }) === 'http://127.0.0.1:7878', 'wallBase 空值时回落到 7878')
+  must(wall.wallBase({ wallUrl: 'http://127.0.0.1:7879/' }) === 'http://127.0.0.1:7879', 'wallBase 去掉末尾斜杠')
+
+  const server = join(ROOT, 'tools', 'comment-wall.mjs')
+  must(existsSync(server), 'tools/comment-wall.mjs 存在')
+  const src = readFileSync(server, 'utf8')
+  for (const frag of ['/api/comments', '/api/health', '127.0.0.1', 'WALL_PORT']) {
+    must(src.includes(frag), `评论墙服务里有 ${frag}`)
+  }
+  must(readFileSync(join(ROOT, 'lib', 'toolset.mjs'), 'utf8').includes('pushComment'),
+    'pixivc_comment 会同步到评论墙')
+} catch (e) { bad('评论墙检查失败', e) }
 
 /* 收尾：把 host 半端的定时器与 MCP 关掉 */
 try {

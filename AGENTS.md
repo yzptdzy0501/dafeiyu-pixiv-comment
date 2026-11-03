@@ -95,9 +95,11 @@
 - `lib/runner.mjs` —— overlay、prompt、spawn、收尾
 - `lib/login-pixiv.mjs` —— OAuth PKCE（本机 Edge）+ 手贴 token
 - `lib/http.mjs` —— 设置页后端
+- `lib/wall.mjs` —— 本地评论墙的遥控器（状态 / 拉起 / 推送；只跟 127.0.0.1 说话）
+- `tools/comment-wall.mjs` —— 评论墙本体，零依赖 HTTP 服务，独立进程，插件刷新不打断它
 - `vendor/pixiv-mcp/` —— 内置 Python MCP（只做网络与字节；`px_comment.py` 管评语与精选）
 - `prompts/duty.md` —— 一轮章程（用户可改；升级不被覆盖）
-- `selfcheck.mjs` —— `node selfcheck.mjs`，115 项断言，退出码 0 才算过
+- `selfcheck.mjs` —— `node selfcheck.mjs`，130 项断言，退出码 0 才算过
 
 ## 约定
 

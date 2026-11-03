@@ -1,6 +1,6 @@
 {
   "name": "dsh-pixiv-comment",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "DSH 插件：按你的口味在 Pixiv 上找作品、看图/读小说、写一句中文评语（默认只存本地，绝不发出去），并把优秀作品连同网址记进精选表，供刷图插件优先挑选",
   "keywords": [
     "dsh",
@@ -33,6 +33,7 @@
     "lib",
     "prompts",
     "vendor",
+    "tools",
     "selfcheck.mjs",
     "README.md",
     "CHANGELOG.md",
