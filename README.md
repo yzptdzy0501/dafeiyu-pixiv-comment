@@ -6,6 +6,7 @@
 
 它是 [`dsh-pixiv-scroll`](https://github.com/yzptdzy0501/dafeiyu-pixiv-scroll) 的**评论专用拆分版**：登录、Python MCP、代理、
 精选表这些底座完全一样，只是把「保存作品」整条链路拿掉了，只剩评论。
+**详细安装教程在 [`dsh-pixiv-scroll`](https://github.com/yzptdzy0501/dafeiyu-pixiv-scroll)**
 
 > 💡 **思路来源**和**代码底本**：本插件（以及它的刷图版）的玩法来自 kuroshio4396 的
 > [`kuroshio4396/dafayu-pixiv-duty`](https://github.com/kuroshio4396/dafayu-pixiv-duty)
