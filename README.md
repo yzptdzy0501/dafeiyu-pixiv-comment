@@ -46,7 +46,7 @@
 
 - `Python 3.10+` **或** `uv`（有一个就够）
 - 登录那一次会用到本机的 **Edge 或 Chrome**
-- 国内环境要能连 Pixiv：准备一个本地代理（如 Clash 的 `http://127.0.0.1:7890`）
+- 国内环境要能连 Pixiv：准备一个本地代理（如 Clash 的 `http://127.0.0.1:12000`**不可用**）
 - 模型要能读图（默认 `deepseek/deepseek-v4.1-flash` 支持 image 输入）
 
 ## 装
