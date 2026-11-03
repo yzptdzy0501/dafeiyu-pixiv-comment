@@ -1,4 +1,4 @@
-# 只评论不保存的 Pixiv 插件（dsh-pixiv-comment）
+# 只评论的 Pixiv 插件（dsh-pixiv-comment）
 
 > DSH 插件：按你的口味在 Pixiv 上**找作品 → 看图/读小说 → 写一句中文评语**，
 > 评语只落在本地文件里，**默认绝不发到 Pixiv 评论区**。
@@ -7,10 +7,9 @@
 它是 [`dsh-pixiv-scroll`](../dsh-pixiv-scroll) 的**评论专用拆分版**：登录、Python MCP、代理、
 精选表这些底座完全一样，只是把「保存作品」整条链路拿掉了，只剩评论。
 
-> 💡 **思路来源**：本插件（以及它的刷图版）的玩法来自 kuroshio4396 的
+> 💡 **思路来源**和**代码底本**：本插件（以及它的刷图版）的玩法来自 kuroshio4396 的
 > [`kuroshio4396/dafayu-pixiv-duty`](https://github.com/kuroshio4396/dafayu-pixiv-duty)
-> ——「让模型自己上蓝P挑作品、看图」这件事是它先做出来的。
-> 它给的是**思路**（玩法与章程写法），**不是代码底本**；代码底本见文末[致谢](#致谢)。
+> ——「让模型自己上蓝P挑作品、看图、存下来」这件事是它先做出来的。
 
 ## 和刷图版有什么不同
 
@@ -73,9 +72,8 @@ dsh plugin --profile web add link:<插件目录>
 **模型请求超时 / `Connection error`（重试 5 次）**
 不是 Pixiv 的问题。子会话必须带 `NODE_OPTIONS=--dns-result-order=ipv4first`
 （本机 DNS 先返回 AAAA，而 IPv6 出口是死的）。**别**把模型请求塞进本地代理：
-2026-11-02 实测 `curl -x http://127.0.0.1:7890 https://你的模型接口域名/...` 会
-`schannel` 握手失败，整轮报 `dsh: TRANSPORT: Connection error`；直连 + IPv4 优先
-首次 4.3 s、之后 0.3 s，稳定可用。Pixiv 的代理由 MCP 子进程自己带，与模型侧无关。
+2026-11-02 实测 会`schannel` 握手失败，整轮报 `dsh: TRANSPORT: Connection error`；
+直连 + IPv4 优先首次 4.3 s、之后 0.3 s，稳定可用。Pixiv 的代理由 MCP 子进程自己带，与模型侧无关。
 
 **`postCap` 不是写作额度**
 `pixivc_comment` 回执里的 `postCap` 只表示「每天最多真发出去几条」，
@@ -122,14 +120,12 @@ node selfcheck.mjs        # 115 项断言，退出码 0 才算过
 这个插件不是从零想出来的，是一路站在别人肩膀上：
 
 - **[`kuroshio4396/dafayu-pixiv-duty`](https://github.com/kuroshio4396/dafayu-pixiv-duty)**（大肥鱼刷P插件）
-  —— **本插件（和刷图版）的思路来源**，不是代码底本。「让模型自己去蓝P挑作品、看图」这套玩法，
+  —— **本插件（和刷图版）的思路来源**和**代码底本**。「让模型自己去蓝P挑作品、看图」这套玩法，
   插件该长什么形状（宿主半端 + headless 子会话 + 内置 Python MCP + 设置面板）、
   `prompts/duty.md` 章程该怎么写，都是从它那里学来的；源头是 B 站 UP 主
   [阳炎级三番舰黑潮](https://space.bilibili.com/17568052) 的视频
   [《大肥鱼也要涩图自由！让 deepseek 自己刷蓝P的插件！》](https://www.bilibili.com/video/BV1eWnz6QEsT/)。
   这里做的是把其中「评论」这条支线单独拆出来、补上额度与精选表。
-- **[`c1overzz/dsh-pixiv-scroll`](https://github.com/c1overzz/dsh-pixiv-scroll)**
-  —— **代码底本**（MIT）：刷图版建立在它上面，本插件又是刷图版的拆分，所以沿用同一套底座。
 - **[DeepSeek Harness](https://github.com/deepseek-ai/dsh)** —— 插件运行的宿主，
   以及它提供的 `ctx.hmr` / `connection.fetch` / workspace 这些能力。
 
@@ -137,5 +133,5 @@ node selfcheck.mjs        # 115 项断言，退出码 0 才算过
 
 ## 许可
 
-MIT。代码底本 [`c1overzz/dsh-pixiv-scroll`](https://github.com/c1overzz/dsh-pixiv-scroll)（原项目 MIT）；
-思路来源 [`kuroshio4396/dafayu-pixiv-duty`](https://github.com/kuroshio4396/dafayu-pixiv-duty)。
+MIT。
+思路来源和代码底本 [`kuroshio4396/dafayu-pixiv-duty`](https://github.com/kuroshio4396/dafayu-pixiv-duty)。
