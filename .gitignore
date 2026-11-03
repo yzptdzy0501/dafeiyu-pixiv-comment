@@ -4,12 +4,15 @@ node_modules/
 __pycache__/
 *.pyc
 
-# 运行产物（都在 $DSH_HOME/pixiv-duty/ 下，仓库里不该出现）
+# 运行产物（都在 $DSH_HOME/pixiv-comment/ 下，仓库里不该出现）
 cache/
 out/
 tmp/
 *.log
 selfcheck-tmp/
+config.json
+state.json
+*.jsonl
 
 # 打包与系统文件
 *.zip

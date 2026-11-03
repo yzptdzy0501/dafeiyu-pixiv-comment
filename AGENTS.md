@@ -77,7 +77,7 @@
   模型很容易把它误读成"额度用完了"而提前收尾。
 - **模型请求超时（`Connection error` 重试 5 次）**：不是 Pixiv 的问题。子会话 env 必须带
   `NODE_OPTIONS=--dns-result-order=ipv4first`；**不要**把模型请求塞进 `proxyUrl` 的代理
-  （2026-11-02 实测：代理节点到 `你的模型接口域名` 的 TLS 握手会失败，整轮报
+  （2026-11-02 实测：代理节点到模型接口域名的 TLS 握手会失败，整轮报
   `dsh: TRANSPORT: Connection error`；直连 + IPv4 优先首次 4.3 s、之后 0.3 s）。
   `lib/runner.mjs` 里的 `proxyEnv` 现在只保留 `NO_PROXY`，并显式删除继承来的 6 个代理变量。
   Pixiv 的代理由 `lib/toolset.mjs` 的 `mcpEnv` 交给 MCP 子进程。
