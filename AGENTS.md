@@ -4,9 +4,11 @@
 写一句中文评语（默认只存本地，绝不发到评论区），并把优秀作品连同网址记进精选表。
 
 它是 `dsh-pixiv-scroll`（刷图版）的评论专用拆分版 —— **不保存作品**，两个插件可以同时装。
-**思路来源**是 [`kuroshio4396/dafayu-pixiv-duty`](https://github.com/kuroshio4396/dafayu-pixiv-duty)
-（玩法与章程写法，**不是代码底本**）；**代码底本**是
-[`c1overzz/dsh-pixiv-scroll`](https://github.com/c1overzz/dsh-pixiv-scroll)（MIT）。
+**思路来源**和**代码底本**都是 [`kuroshio4396/dafayu-pixiv-duty`](https://github.com/kuroshio4396/dafayu-pixiv-duty)
+（大肥鱼刷P插件，包名 `dsh-pixiv-scroll` 1.1.3）：玩法、插件骨架、`prompts/duty.md` 章程写法都来自它，
+本仓库是从它派生出来的刷图版 `dsh-pixiv-scroll` 1.2.0 里再拆出「评论」这条线。
+那份底本自己是从 [`c1overzz/dsh-bili-scroll`](https://github.com/c1overzz/dsh-bili-scroll)（MIT）**借的架构**，
+所以 bili-scroll 只是隔了一层的架构参考，**不是本仓库的代码底本**。
 详见 README「致谢」；改代码时请保留那份致谢，别删。
 
 ## 帮用户安装时，按这个顺序
