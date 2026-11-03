@@ -31,14 +31,14 @@
 
 ## 上游历史与致谢
 
-本插件的**灵感与实际底本**是大肥鱼的
+本插件的**思路来源**是大肥鱼的
 [`kuroshio4396/dafayu-pixiv-duty`](https://github.com/kuroshio4396/dafayu-pixiv-duty)
 （包名 `dsh-pixiv-scroll` 1.1.3，「让 deepseek 自己刷蓝P」那套插件：宿主半端 + headless 子会话 +
-内置 Python MCP + 设置面板 + `duty.md` 章程）。本仓库是在它的 1.2.0 基础上，
-把「评论」这条支线单独拆出来的评论专用版；保存作品那条链路整条拿掉了。
+内置 Python MCP + 设置面板 + `duty.md` 章程）—— 玩法与章程写法是从它学的，刷图版也一样；
+它给的是思路，不是代码底本。
 
-`dafayu-pixiv-duty` 的 LICENSE 又注明它派生自
-[`c1overzz/dsh-pixiv-scroll`](https://github.com/c1overzz/dsh-pixiv-scroll)，本仓库沿用同样的 MIT 许可。
-更早的更新日志留在上游仓库里，本仓库从「评论」这条线往下走。
+**代码底本**是 [`c1overzz/dsh-pixiv-scroll`](https://github.com/c1overzz/dsh-pixiv-scroll)（MIT）。
+本仓库是从刷图版 `dsh-pixiv-scroll` 1.2.0 里把「评论」这条支线单独拆出来的评论专用版；
+保存作品那条链路整条拿掉了。更早的更新日志留在上游仓库里，本仓库从「评论」这条线往下走。
 
 谢谢上游作者的铺路。

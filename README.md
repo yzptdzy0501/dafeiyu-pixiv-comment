@@ -7,10 +7,10 @@
 它是 [`dsh-pixiv-scroll`](../dsh-pixiv-scroll) 的**评论专用拆分版**：登录、Python MCP、代理、
 精选表这些底座完全一样，只是把「保存作品」整条链路拿掉了，只剩评论。
 
-> 💡 **灵感来源**：本插件的玩法与代码底座来自kuroshio4396的
+> 💡 **思路来源**：本插件（以及它的刷图版）的玩法来自 kuroshio4396 的
 > [`kuroshio4396/dafayu-pixiv-duty`](https://github.com/kuroshio4396/dafayu-pixiv-duty)
 > ——「让模型自己上蓝P挑作品、看图」这件事是它先做出来的。
-> 详见文末[致谢](#致谢)。
+> 它给的是**思路**（玩法与章程写法），**不是代码底本**；代码底本见文末[致谢](#致谢)。
 
 ## 和刷图版有什么不同
 
@@ -122,14 +122,14 @@ node selfcheck.mjs        # 115 项断言，退出码 0 才算过
 这个插件不是从零想出来的，是一路站在别人肩膀上：
 
 - **[`kuroshio4396/dafayu-pixiv-duty`](https://github.com/kuroshio4396/dafayu-pixiv-duty)**（大肥鱼刷P插件）
-  —— **本插件的灵感来源与直接底本**。「让模型自己去蓝P挑作品、看图」这套玩法，
-  以及插件骨架（宿主半端 + headless 子会话 + 内置 Python MCP + 设置面板）、
-  `prompts/duty.md` 章程的写法，都来自这个项目，来自 B 站 UP 主
+  —— **本插件（和刷图版）的思路来源**，不是代码底本。「让模型自己去蓝P挑作品、看图」这套玩法，
+  插件该长什么形状（宿主半端 + headless 子会话 + 内置 Python MCP + 设置面板）、
+  `prompts/duty.md` 章程该怎么写，都是从它那里学来的；源头是 B 站 UP 主
   [阳炎级三番舰黑潮](https://space.bilibili.com/17568052) 的视频
   [《大肥鱼也要涩图自由！让 deepseek 自己刷蓝P的插件！》](https://www.bilibili.com/video/BV1eWnz6QEsT/)。
-  没有它就没有本插件 —— 这里做的只是把其中「评论」这条支线单独拆出来、补上额度与精选表。
+  这里做的是把其中「评论」这条支线单独拆出来、补上额度与精选表。
 - **[`c1overzz/dsh-pixiv-scroll`](https://github.com/c1overzz/dsh-pixiv-scroll)**
-  —— 更早的刷图插件原项目（MIT），上游的 LICENSE 注明派生自它，本仓库也沿用。
+  —— **代码底本**（MIT）：刷图版建立在它上面，本插件又是刷图版的拆分，所以沿用同一套底座。
 - **[DeepSeek Harness](https://github.com/deepseek-ai/dsh)** —— 插件运行的宿主，
   以及它提供的 `ctx.hmr` / `connection.fetch` / workspace 这些能力。
 
@@ -137,5 +137,5 @@ node selfcheck.mjs        # 115 项断言，退出码 0 才算过
 
 ## 许可
 
-MIT，派生自 [`kuroshio4396/dafayu-pixiv-duty`](https://github.com/kuroshio4396/dafayu-pixiv-duty)，
-后者派生自 [`c1overzz/dsh-pixiv-scroll`](https://github.com/c1overzz/dsh-pixiv-scroll)（原项目 MIT）。
+MIT。代码底本 [`c1overzz/dsh-pixiv-scroll`](https://github.com/c1overzz/dsh-pixiv-scroll)（原项目 MIT）；
+思路来源 [`kuroshio4396/dafayu-pixiv-duty`](https://github.com/kuroshio4396/dafayu-pixiv-duty)。

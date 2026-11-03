@@ -4,8 +4,10 @@
 写一句中文评语（默认只存本地，绝不发到评论区），并把优秀作品连同网址记进精选表。
 
 它是 `dsh-pixiv-scroll`（刷图版）的评论专用拆分版 —— **不保存作品**，两个插件可以同时装。
-灵感与实际底本是 [`kuroshio4396/dafayu-pixiv-duty`](https://github.com/kuroshio4396/dafayu-pixiv-duty)
-（详见 README「致谢」）；改代码时请保留那份致谢，别删。
+**思路来源**是 [`kuroshio4396/dafayu-pixiv-duty`](https://github.com/kuroshio4396/dafayu-pixiv-duty)
+（玩法与章程写法，**不是代码底本**）；**代码底本**是
+[`c1overzz/dsh-pixiv-scroll`](https://github.com/c1overzz/dsh-pixiv-scroll)（MIT）。
+详见 README「致谢」；改代码时请保留那份致谢，别删。
 
 ## 帮用户安装时，按这个顺序
 
